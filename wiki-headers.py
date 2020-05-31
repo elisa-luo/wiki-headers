@@ -5,31 +5,53 @@ Created on Fri May 29 14:21:08 2020
 wiki-headers
 @author: elisaluo
 """
-source = "wiki_data.txt" #filename of dataset
+import time
+start_time = time.time()
+
+#SETTINGS
+SOURCE = "wiki_data.txt" #filename of dataset
+OCCURENCES =  10 #<OCCURENCES> most common words to display
+RUNTIME = True #display runtime
+SUBHEADERS = False
+CASE_SENSITIVE = False
 
 #headers = []
 word2count = {}
 
-data = open(source, 'r')
+data = open(SOURCE, 'r')
 
-### parse the data ###
+### read and clean-up the data ###
 for line in data:
-    if "==" in line:
+    if "==" in line and line[0] != '*': #exclude 'comment' lines beginning with *
         begin = line.find("==")
         end = line.rfind("==")
         head = line[begin+2:end]
         #print ("["+head+"]")
         try:
-            if not head[0] == '=': #exclude subheaders
-                head = head.strip(' []') #get rid of extra characters/spaces
-                #headers.append(head)
+            if SUBHEADERS:
+                head = head.strip(' []=') #get rid of extra characters/spaces
                 words = head.split()
                 ### add to count dictionary ###
                 for w in words:
+                    if not CASE_SENSITIVE:
+                        w = w.lower()
                     if w not in word2count:
                         word2count[w] = 1;
                     elif w in word2count:
-                        word2count[w] += 1;
+                        word2count[w] += 1;    
+            elif not SUBHEADERS:
+                if not head[0] == '=': #exclude subheaders
+                    head = head.strip(' []') #get rid of extra characters/spaces
+                    #headers.append(head)
+                    words = head.split()
+                    ### add to count dictionary ###
+                    for w in words:
+                        if not CASE_SENSITIVE:
+                            w = w.lower()
+                        if w not in word2count:
+                            word2count[w] = 1;
+                        elif w in word2count:
+                            word2count[w] += 1;
         except IndexError:
             pass
         
@@ -40,17 +62,23 @@ for word in word2count:
 rank.sort()
 
 ### display top occurences ###
-OCCURENCES =  10
 top = rank[-OCCURENCES:]
 top.reverse()
 
-print("{} most common words in headers:\n".format(OCCURENCES))
-print("{}COUNT\n{}".format("WORD".ljust(15),"-"*20))
+print("{} most common words in headers:".format(OCCURENCES))
+print("CASE_SENSITIVE = {}".format(CASE_SENSITIVE))
+print("INCLUDE SUBHEADERS = {}\n".format(SUBHEADERS))
+
+print("{}{}COUNT\n{}".format("RANK ","WORD".ljust(15),"-"*25))
+i = 1
 for entry in top:
     count = entry[0]
     word = entry[1]
-    print("{}{}".format(word.ljust(15),count))
+    print("{} {}{}".format((str(i)+". ").ljust(4),word.ljust(15),count))
+    i+=1
         
+if RUNTIME:    
+    print("\n--- runtime: {} seconds ---".format(time.time() - start_time))
             
             
     
