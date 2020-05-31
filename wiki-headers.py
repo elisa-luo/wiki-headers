@@ -8,16 +8,15 @@ wiki-headers
 import time
 start_time = time.time()
 
-#SETTINGS
+### SETTINGS ###
 SOURCE = "wiki_data.txt" #filename of dataset
 OCCURENCES =  10 #<OCCURENCES> most common words to display
 RUNTIME = True #display runtime
-SUBHEADERS = False
+SUBHEADERS = False #include subheaders in rank
 CASE_SENSITIVE = False
 
-#headers = []
-word2count = {}
 
+word2count = {}
 data = open(SOURCE, 'r')
 
 ### read and clean-up the data ###
@@ -26,7 +25,6 @@ for line in data:
         begin = line.find("==")
         end = line.rfind("==")
         head = line[begin+2:end]
-        #print ("["+head+"]")
         try:
             if SUBHEADERS:
                 head = head.strip(' []=') #get rid of extra characters/spaces
@@ -42,7 +40,6 @@ for line in data:
             elif not SUBHEADERS:
                 if not head[0] == '=': #exclude subheaders
                     head = head.strip(' []') #get rid of extra characters/spaces
-                    #headers.append(head)
                     words = head.split()
                     ### add to count dictionary ###
                     for w in words:
@@ -76,7 +73,8 @@ for entry in top:
     word = entry[1]
     print("{} {}{}".format((str(i)+". ").ljust(4),word.ljust(15),count))
     i+=1
-        
+
+### display total program runtime ###
 if RUNTIME:    
     print("\n--- runtime: {} seconds ---".format(time.time() - start_time))
             
