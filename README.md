@@ -7,6 +7,7 @@ Simply change the following line of code on line `12`: `SOURCE = "wiki_data.txt"
 
 __Additional Settings:__
 Settings are currently from lines `12` through `16`
+- `SOURCE`: change the dataset file to be used
 - `OCCURENCES`: adjust the _n_ most common words to display. [Default = `10`]
 - `RUNTIME`: toggle program runtime display on/off. [Default = `True`]
 - `SUBHEADERS`: toggle including/ignorning subheaders in the final ranking. [Default = `False`]
