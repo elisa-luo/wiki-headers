@@ -3,7 +3,7 @@
 A Python script that determines the most common words used in headers of wikipedia articles. Note that the headers are assumed to be surrounded by two equals signs, i.e. ==New York==
 
 __Use:__
-Simply change the following line of code on line `11`: `SOURCE = "wiki_data.txt" #filename of dataset` to contain the filename (filepath if file is not in the same directory) of the dataset to be used. i.e. `SOURCE = "<your_file_path>"`
+Simply change the following line of code on line `12`: `SOURCE = "wiki_data.txt" #filename of dataset` to contain the filename (filepath if file is not in the same directory) of the dataset to be used. i.e. `SOURCE = "<your_file_path>"`
 
 __Additional Settings:__
 Settings are currently from lines `12` through `16`
