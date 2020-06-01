@@ -7,10 +7,10 @@ Simply change the following line of code on line `12`: `SOURCE = "wiki_data.txt"
 
 __Additional Settings:__
 Settings are currently from lines `12` through `16`
-- adjust the _n_ most common words to display by changing the `OCCURENCES` variable. Default = `10`
-- toggle program runtime display on/off by changing the `RUNTIME`. Default = `True`
-- toggle including/ignorning subheaders in the final ranking by changing `SUBHEADERS`. Default = `False` 
-- toggle if the words should be case-senstive by changing `CASE_SENSITIVE`. Default = `False`
+- `OCCURENCES`: adjust the _n_ most common words to display. [Default = `10`]
+- `RUNTIME`: toggle program runtime display on/off. [Default = `True`]
+- `SUBHEADERS`: toggle including/ignorning subheaders in the final ranking. [Default = `False`]
+- `CASE_SENSITIVE`: toggle if the words should be case-senstive. [Default = `False`]
 
 __Sample Output:__
 ```
